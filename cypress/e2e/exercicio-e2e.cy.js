@@ -3,7 +3,7 @@
 import produtosPage from "../support/page_objects/produtos.Page";
 
 
-describe( 'Funcionalidade:cadastro', () => {
+describe( 'Compras', () => {
 
 
     beforeEach(() => {
@@ -18,18 +18,18 @@ it('deve colocar os produtos na lista', () => {
     function adicionarProduto(nomeProduto, tamanho, cor) {
         produtosPage.buscarProduto(nomeProduto);
         produtosPage.addCarrinho(tamanho, cor, 1);
-        cy.get('.woocommerce-message').should('exist');
+        cy.get('.woocommerce-message').should('contain','foi adicionado no seu carrinho.');
       }
       
-      adicionarProduto('Abominable Hoodie', 'S', 'Blue');
-      adicionarProduto('Apollo Running Short', '33', 'Black');
+      adicionarProduto('Aero Daily Fitness Tee', 'L', 'Brown');
+      adicionarProduto('Ajax Full-Zip Sweatshirt', 'M', 'Green');
       adicionarProduto('Atlas Fitness Tank', 'M', 'Blue');
       adicionarProduto('Ariel Roll Sleeve Sweatshirt', 'XL', 'Purple');
 
 
 cy.get('.dropdown-toggle > .text-skin > .icon-basket').click(); 
 
-cy.get('#cart > .dropdown-menu > .widget_shopping_cart_content > .mini_cart_content > .mini_cart_inner > .mcart-border > .buttons > .checkout').click(); 
+cy.get('#cart .checkout').click(); 
 
 
 cy.get('#billing_address_1').type('silva gomes');
@@ -41,7 +41,10 @@ cy.get('#place_order').click()
 
 
 
-cy.get('.page-title').should('exist')
+cy.wait(10000); 
+cy.get('.page-title').should('contain', 'Pedido recebido');
+
+
 
  });
 

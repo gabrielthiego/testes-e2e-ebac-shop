@@ -27,4 +27,11 @@ describe( 'Compras', () => {
       cy.login('gabrielteste@teste.com.br', 'teste@123' )
       cy.get('#primary-menu > .menu-item-629 > a').click()
 });
-    
+produtosPage.buscarProduto('Abominable Hoodie')
+produtosPage.addCarrinho('S','Blue', 1)
+cy.get('.woocommerce-message').should('exist')
+cy.get('#primary-menu > .menu-item-629 > a').click()
+ produtosPage.buscarProduto('Apollo Running Short')
+ produtosPage.addCarrinho('33','Black', 1)
+ cy.get('.woocommerce-message').should('exist')
+ cy.get('#primary-menu > .menu-item-629 > a').click()
